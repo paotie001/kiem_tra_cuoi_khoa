@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 3</title>
+</head>
+<body>
+<h2>Tính số ngày trong tháng và năm</h2>
+<label for="monthYear">Nhập tháng và năm (MM/yyyy): </label>
+<input type="text" id="monthYear" placeholder="Ví dụ: 02/2024">
+<button onclick="calculateDays()">Tính số ngày</button>
+<div id="result"></div>
+
+<script>
+    // Kiểm tra năm nhuận
+    function isLeapYear(year) {
+        return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    }
+
+    // Hàm tính số ngày trong tháng
+    function calculateDays() {
+        const input = document.getElementById("monthYear").value;
+        const regex = /^(0[1-9]|1[0-2])\/(20[0-9]{2})$/;  // Kiểm tra định dạng MM/yyyy
+
+        if (!regex.test(input)) {
+            document.getElementById("result").innerText = "Định dạng không hợp lệ! Vui lòng nhập theo định dạng MM/yyyy.";
+            return;
+        }
+
+        // Tách tháng và năm từ chuỗi nhập vào
+        const [month, year] = input.split('/').map(Number);
+
+        let daysInMonth;
+
+        // Kiểm tra số ngày trong tháng
+        if (month === 2) {
+            // Tháng 2, kiểm tra năm nhuận
+            if (isLeapYear(year)) {
+                daysInMonth = 29;
+            } else {
+                daysInMonth = 28;
+            }
+        } else if ([4, 6, 9, 11].includes(month)) {
+            // Các tháng có 30 ngày
+            daysInMonth = 30;
+        } else {
+            // Các tháng còn lại có 31 ngày
+            daysInMonth = 31;
+        }
+
+        document.getElementById("result").innerText = `Tháng ${month}/${year} có ${daysInMonth} ngày.`;
+    }
+</script>
+</body>
+</html>
