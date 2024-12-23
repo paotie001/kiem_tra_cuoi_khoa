@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 2</title>
+</head>
+<body>
+<h2>Kiểm tra số hoàn hảo</h2>
+<label for="numbers">Nhập số nguyên dương: </label>
+<input type="number" id="numbers">
+<button onclick="perfectNumberCheck()">Kiểm tra</button>
+<div id="result"></div>
+
+<script>
+    function perfectNumberCheck() {
+        // Lấy giá trị nhập vào và chuyển thành số nguyên
+        let number = parseInt(document.getElementById("numbers").value);
+
+        // Kiểm tra số nhập vào có hợp lệ không
+        if (isNaN(number) || number <= 0) {
+            document.getElementById("result").innerText = "Vui lòng nhập một số nguyên dương.";
+            return;
+        }
+
+        let sum = 0;
+
+        // Tính tổng các ước số của number (không tính chính nó)
+        for (let i = 1; i <= number / 2; i++) {
+            if (number % i === 0) {
+                sum += i;
+            }
+        }
+
+        // Kiểm tra xem tổng các ước số có bằng chính số đó không
+        if (sum === number) {
+            document.getElementById("result").innerText = number + " là số hoàn hảo.";
+        } else {
+            document.getElementById("result").innerText = number + " không phải là số hoàn hảo.";
+        }
+    }
+</script>
+</body>
+</html>
